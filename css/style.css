@@ -1,0 +1,523 @@
+/* --- Variáveis Globais e Reset --- */
+:root {
+    --font-primary: 'Montserrat', sans-serif;
+    --font-secondary: 'Open Sans', sans-serif;
+
+    /* Modo Claro (Default) */
+    --bg-color: #FFFFFF;
+    --text-color: #212529;
+    --primary-accent: #0A85A8; /* Azul petróleo */
+    --secondary-text: #6C757D;
+    --card-bg: #FFFFFF;
+    --border-color: #DEE2E6;
+    --nav-bg: rgba(255, 255, 255, 0.95);
+    --shadow-sm: 0 2px 4px rgba(0,0,0,0.05);
+    --shadow-md: 0 5px 15px rgba(0,0,0,0.08);
+    --btn-text-color: #FFFFFF;
+    --btn-primary-hover-bg: color-mix(in srgb, var(--primary-accent) 85%, black);
+    --btn-outline-hover-text: #FFFFFF;
+}
+
+body.dark-mode {
+    --bg-color: #121212;
+    --text-color: #E0E0E0;
+    --secondary-text: #A0A0A0;
+    --card-bg: #1E1E1E;
+    --border-color: #333333;
+    --nav-bg: rgba(30, 30, 30, 0.95);
+    --btn-text-color: #E0E0E0;
+    --btn-primary-hover-bg: color-mix(in srgb, var(--primary-accent) 70%, white);
+    --btn-outline-hover-text: #121212; /* Texto do botão outline no hover em dark mode */
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+    font-size: 16px; /* Base para REM */
+}
+
+body {
+    font-family: var(--font-secondary);
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    line-height: 1.7;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.container {
+    width: 90%;
+    max-width: 1140px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 15px; /* Para evitar que o conteúdo grude nas bordas em telas menores */
+    padding-right: 15px;
+}
+
+/* --- Tipografia --- */
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-primary);
+    font-weight: 700;
+    line-height: 1.3;
+    margin-bottom: 0.75rem;
+    color: var(--text-color);
+}
+
+h1 { font-size: 2.8rem; margin-bottom: 1.5rem; }
+h2 { font-size: 2.25rem; margin-bottom: 2.5rem; text-align: center; }
+h3 { font-size: 1.4rem; }
+
+p {
+    margin-bottom: 1rem;
+    color: var(--secondary-text);
+}
+
+a {
+    color: var(--primary-accent);
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+a:hover {
+    color: color-mix(in srgb, var(--primary-accent) 70%, black);
+}
+body.dark-mode a:hover {
+    color: color-mix(in srgb, var(--primary-accent) 70%, white);
+}
+
+
+/* --- Header --- */
+header {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background-color: var(--nav-bg);
+    backdrop-filter: blur(10px);
+    box-shadow: var(--shadow-sm);
+    padding: 1rem 0;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+header nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+header .logo {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: var(--primary-accent);
+    font-family: var(--font-primary);
+}
+
+header nav ul {
+    list-style: none;
+    display: flex;
+    align-items: center; /* Centralizar verticalmente com o botão de dark mode */
+}
+
+header nav ul li {
+    margin-left: 25px;
+}
+
+header nav ul li a {
+    font-family: var(--font-primary);
+    font-weight: 600;
+    color: var(--text-color);
+    padding-bottom: 5px;
+    position: relative;
+}
+
+header nav ul li a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: var(--primary-accent);
+    transition: width 0.3s ease;
+}
+
+header nav ul li a:hover::after,
+header nav ul li a.active::after {
+    width: 100%;
+}
+
+#darkModeToggle {
+    background: none;
+    border: none;
+    color: var(--text-color);
+    font-size: 1.25rem;
+    cursor: pointer;
+    padding: 0.5rem;
+    margin-left: 20px; /* Espaço entre o último item do menu e o botão */
+    transition: color 0.3s ease;
+}
+#darkModeToggle:hover {
+    color: var(--primary-accent);
+}
+
+.nav-toggler {
+    display: none; /* Escondido por padrão */
+    background: none;
+    border: none;
+    color: var(--text-color);
+    font-size: 1.5rem;
+    cursor: pointer;
+    padding: 0.5rem;
+    z-index: 1100; /* Acima do menu */
+}
+
+/* --- Seções --- */
+section {
+    padding: 80px 0; /* Mais padding vertical */
+}
+
+section h2::after {
+    content: '';
+    display: block;
+    width: 50px;
+    height: 3px;
+    background-color: var(--primary-accent);
+    margin: 0.5rem auto 0;
+}
+
+/* --- Hero Section --- */
+#inicio { /* Renomeado de .hero para #inicio */
+    min-height: 80vh;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    padding-top: 0; /* Remover padding superior se header for sticky */
+    padding-bottom: 40px;
+}
+#inicio .container {
+    max-width: 800px;
+}
+#inicio p.subtitle {
+    font-size: 1.25rem;
+    color: var(--secondary-text);
+    margin-bottom: 2rem;
+}
+
+/* --- Botões --- */
+.btn {
+    display: inline-block;
+    font-family: var(--font-primary);
+    font-weight: 600;
+    padding: 0.75rem 1.5rem;
+    border-radius: 50px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    font-size: 0.95rem;
+    border: 2px solid transparent;
+    text-align: center;
+}
+.btn-primary {
+    background-color: var(--primary-accent);
+    color: var(--btn-text-color);
+    border-color: var(--primary-accent);
+}
+.btn-primary:hover {
+    background-color: var(--btn-primary-hover-bg);
+    border-color: var(--btn-primary-hover-bg);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+body.dark-mode .btn-primary {
+    color: #FFFFFF; /* Forçar texto branco no botão primário em dark mode */
+}
+
+.btn-outline {
+    background-color: transparent;
+    color: var(--primary-accent);
+    border-color: var(--primary-accent);
+}
+.btn-outline:hover {
+    background-color: var(--primary-accent);
+    color: var(--btn-outline-hover-text);
+    transform: translateY(-2px);
+}
+.btn i {
+    margin-left: 0.5em;
+}
+
+/* --- Projetos --- */
+.projetos-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 2rem;
+}
+
+.projeto-item {
+    background-color: var(--card-bg);
+    border-radius: 8px;
+    box-shadow: var(--shadow-md);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.projeto-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+}
+.projeto-imagem img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    display: block;
+}
+.projeto-info {
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+.projeto-info h3 {
+    color: var(--text-color);
+}
+.projeto-descricao {
+    font-size: 0.9rem;
+    color: var(--secondary-text);
+    flex-grow: 1;
+    margin-bottom: 1rem;
+}
+.projeto-tecnologias {
+    font-size: 0.85rem;
+    color: var(--secondary-text);
+    margin-bottom: 1.25rem;
+}
+.projeto-tecnologias strong {
+    color: var(--text-color);
+    font-weight: 600;
+}
+.projeto-links {
+    margin-top: auto;
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap; /* Para botões quebrarem linha se necessário */
+}
+.projeto-links .btn {
+    font-size: 0.85rem;
+    padding: 0.5rem 1rem;
+}
+
+/* --- Habilidades --- */
+#habilidades .container h2 { /* Para garantir que o h2 da seção de habilidades também tenha a linha */
+    margin-bottom: 2.5rem; /* Mantém consistência */
+}
+#habilidades .container h2::after { /* Adicionado para consistência */
+    content: '';
+    display: block;
+    width: 50px;
+    height: 3px;
+    background-color: var(--primary-accent);
+    margin: 0.5rem auto 0;
+}
+
+.habilidades-categorias {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    text-align: left;
+}
+.habilidades-categorias .categoria {
+    background-color: var(--card-bg);
+    padding: 1.5rem;
+    border-radius: 8px;
+    box-shadow: var(--shadow-sm);
+    border: 1px solid var(--border-color);
+}
+.habilidades-categorias .categoria h4 {
+    font-family: var(--font-primary);
+    color: var(--primary-accent);
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+    border-bottom: 2px solid var(--primary-accent);
+    padding-bottom: 0.5rem;
+    display: inline-block;
+}
+.habilidades-categorias .categoria ul {
+    list-style: none;
+    padding-left: 0;
+}
+.habilidades-categorias .categoria ul li {
+    background-color: transparent; /* Remover fundo individual de li se dentro de card */
+    color: var(--secondary-text);
+    padding: 0.3rem 0; /* Ajustar padding */
+    border: none; /* Remover borda individual */
+    box-shadow: none; /* Remover sombra individual */
+    border-radius: 0;
+    font-weight: 400; /* Peso normal para itens de lista */
+    font-size: 0.95rem;
+    position: relative;
+    padding-left: 1.2em; /* Espaço para o marcador personalizado */
+}
+
+.habilidades-categorias .categoria ul li::before { /* Marcador personalizado */
+    content: "\f00c"; /* Código do ícone de check do Font Awesome */
+    font-family: "Font Awesome 5 Free"; /* Ou a versão que estiver usando */
+    font-weight: 900; /* Necessário para ícones sólidos do FA */
+    color: var(--primary-accent);
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 0.8em;
+}
+
+/* --- Educação --- */
+#educacao .container h2 { /* Para garantir que o h2 da seção de educação também tenha a linha */
+    margin-bottom: 2.5rem; /* Mantém consistência */
+}
+#educacao .container h2::after { /* Adicionado para consistência */
+    content: '';
+    display: block;
+    width: 50px;
+    height: 3px;
+    background-color: var(--primary-accent);
+    margin: 0.5rem auto 0;
+}
+.educacao-item {
+    background-color: var(--card-bg);
+    padding: 1.5rem;
+    border-radius: 8px;
+    box-shadow: var(--shadow-md);
+    margin-bottom: 1.5rem;
+    border: 1px solid var(--border-color);
+    text-align: left;
+}
+.educacao-item:last-child {
+    margin-bottom: 0;
+}
+.educacao-item h3 {
+    font-size: 1.3rem;
+    color: var(--primary-accent);
+    margin-bottom: 0.25rem;
+}
+.educacao-item .instituicao {
+    font-family: var(--font-primary);
+    font-weight: 600;
+    color: var(--text-color);
+    font-size: 1rem;
+    margin-bottom: 0.25rem;
+}
+.educacao-item .periodo {
+    font-size: 0.85rem;
+    color: var(--secondary-text);
+    margin-bottom: 0.75rem;
+    font-style: italic;
+}
+.educacao-item .detalhes {
+    font-size: 0.95rem;
+    color: var(--secondary-text);
+    line-height: 1.6;
+}
+
+/* --- Contato --- */
+#contato .container {
+    max-width: 700px;
+    text-align: center;
+}
+#contato p[style*="margin-top"] { /* Para o parágrafo do telefone */
+    font-size: 1rem;
+    color: var(--secondary-text);
+}
+.contato-links {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+.contato-links a { /* Botões de contato */
+    margin: 0; /* Removido margin individual, usando gap */
+}
+
+/* --- Footer --- */
+footer {
+    text-align: center;
+    padding: 2rem 0;
+    margin-top: 3rem;
+    background-color: var(--card-bg); /* Usar card-bg para leve destaque */
+    border-top: 1px solid var(--border-color);
+    color: var(--secondary-text);
+    font-size: 0.9rem;
+}
+body.dark-mode footer {
+    background-color: var(--bg-color); /* Em dark mode, pode ser o mesmo do body */
+}
+
+/* --- Animação de Scroll Reveal --- */
+.reveal {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.8s ease-out, transform 0.6s ease-out;
+}
+.reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* --- Responsividade --- */
+@media (max-width: 992px) {
+    h1 { font-size: 2.5rem; }
+    h2 { font-size: 2rem; }
+}
+
+@media (max-width: 768px) {
+    html { font-size: 15px; }
+    h1 { font-size: 2.2rem; }
+    h2 { font-size: 1.8rem; }
+    section { padding: 60px 0; }
+
+    header nav ul {
+        display: none; /* Escondido por padrão */
+        flex-direction: column;
+        position: absolute;
+        top: 100%; /* Logo abaixo do header */
+        left: 0;
+        width: 100%;
+        background-color: var(--nav-bg); /* Mesmo fundo do header */
+        box-shadow: var(--shadow-sm);
+        padding: 1rem 0;
+        z-index: 1050; /* Acima do conteúdo, abaixo do toggler se ele sobrepuser */
+    }
+    header nav ul.active {
+        display: flex; /* Mostrado quando ativo */
+    }
+    header nav ul li {
+        margin: 0.75rem 0;
+        width: 100%;
+        text-align: center;
+    }
+    .habilidades-categorias {
+        grid-template-columns: 1fr; /* Coluna única em telas menores */
+    }
+    .nav-toggler {
+        display: block; /* Mostrar o botão hamburger */
+    }
+    #darkModeToggle {
+        margin-left: 10px; /* Ajustar margem quando menu hamburger está presente */
+    }
+    .projetos-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 480px) {
+    h1 { font-size: 2rem; }
+    h2 { font-size: 1.6rem; }
+    .btn { padding: 0.6rem 1.2rem; font-size: 0.9rem;}
+    .projeto-links { flex-direction: column; align-items: stretch;}
+    .projeto-links .btn { width: 100%; margin-bottom: 0.5rem;}
+    .projeto-links .btn:last-child { margin-bottom: 0;}
+}

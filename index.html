@@ -1,31 +1,165 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Paulinho Lanius</title>
-    <link rel="stylesheet" href="style.css" />
-  </head>
-  <body>
-    <header>
-      <nav>
-        <a href="#" class="logo"><span>Paulinho</span></a>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfólio - Paulinho Lanius Junior</title>
 
-        <ul class="menu">
-          <a href="#home">Início</a>
-          <a href="#about">Sobre</a>
-          <a href="#projects">Projetos</a>
-          <a href="#contact">Contato</a>
-        </ul>
-      </nav>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header>
+        <nav class="container">
+            <a href="#inicio" class="logo">Paulinho Lanius J.</a>
+            <button class="nav-toggler" aria-label="Abrir menu de navegação" aria-expanded="false">
+                <i class="fas fa-bars"></i>
+            </button>
+            <ul>
+                <li><a href="#inicio">Início</a></li>
+                <li><a href="#sobre">Sobre</a></li>
+                <li><a href="#projetos">Projetos</a></li>
+                <li><a href="#habilidades">Habilidades</a></li>
+                <li><a href="#educacao">Educação</a></li>
+                <li><a href="#contato">Contato</a></li>
+            </ul>
+            <button id="darkModeToggle" aria-label="Alternar modo de cor">
+                <i class="fas fa-moon"></i>
+            </button>
+        </nav>
     </header>
 
-    <section class="home">
-      <h1><span>Paulinho Lanius J</span></h1>
-      <h3>Desenvolvedor Front-End</h3>
-      <img src="" alt="" />
-    </section>
+    <main>
+        <section id="inicio" class="hero reveal">
+            <div class="container">
+                <h1>Paulinho Lanius Junior</h1>
+                <p class="subtitle">Desenvolvedor Backend | Java | SpringBoot | MySQL</p>
+                <a href="#projetos" class="btn btn-primary">Ver Meus Projetos <i class="fas fa-arrow-down"></i></a>
+            </div>
+        </section>
 
-    <script src="script.js"></script>
-  </body>
+        <section id="sobre" class="reveal">
+            <div class="container">
+                <h2>Sobre Mim</h2>
+                <p>Sou um desenvolvedor backend com 1 ano e 7 meses de estudo dedicado, atualmente buscando minha primeira oportunidade profissional na área de tecnologia. Minha paixão é construir a lógica e a infraestrutura que sustentam aplicações robustas e eficientes.</p>
+                <p>Com experiência prévia em atendimento ao público e negociações, desenvolvi habilidades de comunicação e colaboração, que considero valiosas para o trabalho em equipe. Tenho grande facilidade em aprender novas tecnologias e uma forte vontade de continuar evoluindo meus conhecimentos. Resido em Goiânia, GO.</p>
+            </div>
+        </section>
+
+        <section id="projetos" class="reveal">
+            <div class="container">
+                <h2>Projetos em Destaque</h2>
+                <div class="projetos-grid">
+                    <article class="projeto-item reveal">
+                        <div class="projeto-imagem">
+                            <img src="img/contracto_backend.png" alt="Projeto Contracto Backend">
+                            </div>
+                        <div class="projeto-info">
+                            <h3>Contracto - Gerenciador de Contratos</h3>
+                            <p class="projeto-descricao">
+                                Uma aplicação web desenvolvida para gerenciar contratos, com foco na segurança e organização dos dados.
+                                O backend foi construído para lidar com:
+                                <ul>
+                                    <li>Sistema de autenticação (login/registro) e autorização com níveis de acesso.</li>
+                                    <li>Integração robusta com banco de dados MySQL para persistência de informações de usuários e arquivos.</li>
+                                    <li>Armazenamento seguro e gerenciamento de arquivos de contrato enviados pelos usuários.</li>
+                                </ul>
+                            </p>
+                            <p class="projeto-tecnologias">
+                                <strong>Tecnologias Backend:</strong> Java, SpringBoot, MySQL<br>
+                                <strong>Frontend (Interface):</strong> HTML, CSS, JavaScript<br>
+                                <strong>Versionamento:</strong> Git, GitHub
+                            </p>
+                            <div class="projeto-links">
+                                <a href="https://github.com/PaulinhoLaniusJunior/Contracto" target="_blank" class="btn btn-outline">Ver Código no GitHub <i class="fab fa-github"></i></a>
+                                </div>
+                        </div>
+                    </article>
+                    </div>
+            </div>
+        </section>
+
+        <section id="habilidades" class="reveal">
+            <div class="container">
+                <h2>Habilidades Técnicas</h2>
+                <div class="habilidades-categorias">
+                    <div class="categoria">
+                        <h4>Backend</h4>
+                        <ul>
+                            <li>Java</li>
+                            <li>SpringBoot</li>
+                            <li>MySQL</li>
+                            <li>API RESTful</li>
+                            <li>Python (para scripting e desenvolvimento web)</li>
+                        </ul>
+                    </div>
+                    <div class="categoria">
+                        <h4>Frontend (Conhecimento)</h4>
+                        <ul>
+                            <li>HTML5</li>
+                            <li>CSS3</li>
+                            <li>JavaScript</li>
+                            <li>ReactJS (Básico)</li>
+                        </ul>
+                    </div>
+                    <div class="categoria">
+                        <h4>Ferramentas & Outros</h4>
+                        <ul>
+                            <li>Git</li>
+                            <li>GitHub</li>
+                            <li>SQL</li>
+                            <li>Desenvolvimento Web</li>
+                            <li>Trabalho em Equipe</li>
+                            <li>Aprendizado Rápido</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="educacao" class="reveal">
+            <div class="container">
+                <h2>Educação</h2>
+                <div class="educacao-item">
+                    <h3>Análise e Desenvolvimento de Sistemas</h3>
+                    <p class="instituicao">PUCGO - Pontifícia Universidade Católica de Goiás</p>
+                    <p class="periodo">Agosto 2023 - Dezembro 2026 (Previsto)</p>
+                    <p class="detalhes">Principais disciplinas e tecnologias abordadas: Java, HTML, CSS, JavaScript, Python, MySQL, Estrutura de Dados, Engenharia de Software.</p>
+                </div>
+                 <div class="educacao-item">
+                    <h3>Experiência Profissional Prévia</h3>
+                    <p class="instituicao">Lanius Transportes</p>
+                    <p class="periodo">Vendedor, Mecânico - Janeiro 2021 - Julho 2023</p>
+                    <p class="detalhes">Responsável por atendimento ao público e negociações, além de manutenção mecânica. Essa experiência contribuiu para o desenvolvimento de habilidades de comunicação, resolução de problemas e adaptabilidade.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="contato" class="reveal">
+            <div class="container">
+                <h2>Vamos Conversar?</h2>
+                <p>Estou animado para discutir como minhas habilidades em desenvolvimento backend podem agregar valor à sua equipe. Entre em contato!</p>
+                <div class="contato-links">
+                    <a href="mailto:Paulinholaniusjunior@gmail.com" class="btn btn-primary">Enviar E-mail <i class="fas fa-envelope"></i></a>
+                    <a href="https://linkedin.com/in/paulinholaniusjunior/" target="_blank" class="btn btn-outline">LinkedIn <i class="fab fa-linkedin"></i></a>
+                    <a href="https://github.com/PaulinhoLaniusJunior" target="_blank" class="btn btn-outline">GitHub <i class="fab fa-github"></i></a>
+                    </div>
+                <p style="margin-top: 20px;">Telefone: (66) 99676-0677</p>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; <span id="currentYear"></span> Paulinho Lanius Junior. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+</body>
 </html>
