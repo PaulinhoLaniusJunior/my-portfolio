@@ -189,23 +189,64 @@ section h2::after {
     margin: 0.5rem auto 0;
 }
 
-/* --- Hero Section --- */
-#inicio { /* Renomeado de .hero para #inicio */
+/* --- Hero Section--- */
+#inicio {
     min-height: 80vh;
     display: flex;
     align-items: center;
-    text-align: center;
-    padding-top: 0; /* Remover padding superior se header for sticky */
-    padding-bottom: 40px;
+    padding-top: 60px; /* Espaço para o header fixo, ajuste conforme necessário */
+    padding-bottom: 60px;
+    overflow: hidden; /* Para evitar barras de rolagem se a imagem for grande antes de carregar */
 }
-#inicio .container {
-    max-width: 800px;
+
+.hero-container { /* Novo container para o layout flex da hero */
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem; /* Espaço entre o texto e a imagem */
+    width: 100%; /* Ocupa a largura do .container pai */
 }
+
+.hero-text {
+    flex: 1; /* Permite que o texto ocupe o espaço disponível, empurrando a imagem */
+    /* max-width: 600px;  Opcional: se quiser limitar a largura do texto */
+    text-align: left; /* Alinhar texto à esquerda */
+}
+
+/* Ajustes nos estilos de H1 e subtítulo se eles estavam centralizados antes */
+#inicio h1 {
+    color: var(--text-color); /* Mantém a cor do tema */
+    font-size: 2.8rem; /* Ou o tamanho que estava antes */
+    margin-bottom: 1rem;
+    text-align: left; /* Garante alinhamento à esquerda */
+}
+
 #inicio p.subtitle {
-    font-size: 1.25rem;
+    font-size: 1.25rem; /* Ou o tamanho que estava antes */
     color: var(--secondary-text);
     margin-bottom: 2rem;
+    text-align: left; /* Garante alinhamento à esquerda */
 }
+
+/* Estilo para a imagem na Hero */
+.hero-image {
+    flex-basis: 320px; /* Largura base da imagem, ajuste conforme sua foto */
+    flex-shrink: 0;    /* Impede que a imagem encolha demais */
+    text-align: center; /* Centraliza a imagem se ela for menor que o flex-basis */
+}
+
+.hero-image img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 50%; /* Foto circular - visual moderno */
+    /* Ou use: border-radius: 15px; para cantos suavemente arredondados */
+    border: 6px solid var(--primary-accent); /* Borda com a cor de destaque */
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15); /* Sombra mais pronunciada para destaque */
+    object-fit: cover; /* Garante que a imagem cubra a área sem distorcer (se for quadrada/retangular antes do border-radius) */
+    width: 300px;  /* Defina um tamanho para a imagem, para que o border-radius 50% funcione bem */
+    height: 300px; /* Mantenha igual ao width para um círculo perfeito */
+}
+
 
 /* --- Botões --- */
 .btn {
@@ -270,11 +311,90 @@ body.dark-mode .btn-primary {
     transform: translateY(-5px);
     box-shadow: 0 8px 20px rgba(0,0,0,0.12);
 }
-.projeto-imagem img {
-    width: 100%;
+/* --- Estilos para o Carrossel de Imagens do Projeto --- */
+.projeto-imagem {
+    position: relative;
+    /* Necessário para posicionar os botões do carrossel */
+    overflow: hidden;
+    /* Esconde as partes dos slides que estão fora da área visível */
+    background-color: var(--border-color);
+    /* Cor de fundo enquanto as imagens carregam */
     height: 220px;
+    /* Mantenha a altura consistente com o design original */
+    /* Se você removeu a altura fixa antes, pode precisar reajustar aqui ou no .carrossel-container */
+}
+
+.carrossel-container {
+    display: flex;
+    /* Alinha os slides horizontalmente */
+    height: 100%;
+    /* Ocupa toda a altura do .projeto-imagem */
+    transition: transform 0.4s ease-in-out;
+    /* Animação suave da transição dos slides */
+}
+
+.carrossel-slide {
+    min-width: 100%;
+    /* Cada slide ocupa 100% da largura do .projeto-imagem */
+    flex-shrink: 0;
+    /* Impede que os slides encolham */
+    height: 100%;
+    /* Cada slide ocupa 100% da altura */
+    box-sizing: border-box;
+    /* Garante que padding/border não afetem o tamanho total */
+}
+
+.carrossel-slide img {
+    width: 100%;
+    height: 100%;
     object-fit: cover;
+    /* Cobre a área, pode cortar a imagem para encaixar. Use 'contain' se preferir ver a imagem inteira com possíveis barras. */
     display: block;
+    /* Remove espaço extra abaixo da imagem */
+}
+
+.carrossel-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.4);
+    color: white;
+    border: none;
+    padding: 0;
+    /* Removido para controle preciso com width/height */
+    cursor: pointer;
+    z-index: 10;
+    /* Garante que os botões fiquem sobre a imagem */
+    font-size: 1.5rem;
+    line-height: 1;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.2s ease, opacity 0.3s ease;
+    opacity: 0.7;
+    /* Um pouco transparente por padrão */
+}
+
+.carrossel-btn:hover {
+    background-color: rgba(0, 0, 0, 0.7);
+    opacity: 1;
+}
+
+.carrossel-btn.prev {
+    left: 10px;
+}
+
+.carrossel-btn.next {
+    right: 10px;
+}
+
+/* Classe para ocultar botões se houver apenas uma imagem ou no início/fim se não for loop */
+.carrossel-btn.hidden {
+    display: none !important;
+    /* Usar !important com cautela, mas útil aqui */
 }
 .projeto-info {
     padding: 1.5rem;
@@ -469,8 +589,16 @@ body.dark-mode footer {
 
 /* --- Responsividade --- */
 @media (max-width: 992px) {
-    h1 { font-size: 2.5rem; }
-    h2 { font-size: 2rem; }
+    #inicio h1 {
+        font-size: 2.5rem; /* Reduzir um pouco o título */
+    }
+    .hero-image {
+        flex-basis: 280px; /* Reduzir um pouco a base da imagem */
+    }
+    .hero-image img {
+        width: 260px;
+        height: 260px;
+    }
 }
 
 @media (max-width: 768px) {
@@ -478,7 +606,27 @@ body.dark-mode footer {
     h1 { font-size: 2.2rem; }
     h2 { font-size: 1.8rem; }
     section { padding: 60px 0; }
-
+    .hero-container {
+        flex-direction: column-reverse; /* Imagem acima do texto */
+        text-align: center; /* Centralizar tudo quando empilhado */
+    }
+    .hero-text {
+        text-align: center; /* Centralizar texto quando empilhado */
+        margin-top: 2rem; /* Espaço entre imagem e texto */
+    }
+    #inicio h1,
+    #inicio p.subtitle {
+        text-align: center; /* Centralizar títulos na hero em mobile */
+    }
+    .hero-image {
+        flex-basis: auto; /* Largura automática */
+        margin-bottom: 1rem; /* Espaço abaixo da imagem antes do texto */
+    }
+    .hero-image img {
+        width: 200px; /* Tamanho da foto em mobile */
+        height: 200px;
+        border-width: 4px; /* Borda mais fina em mobile */
+    }
     header nav ul {
         display: none; /* Escondido por padrão */
         flex-direction: column;
